@@ -44,7 +44,7 @@ io.on('connection', function(socket){
   //   }
   //   
   //   socket.emit('history-onload', _historyObject);
-  });
+  // });
 });
 
 http.listen(process.env.PORT || 5000, function(){
