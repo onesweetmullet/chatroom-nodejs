@@ -24,25 +24,26 @@ io.on('connection', function(socket){
   });
   
   
-  fs.readFile('history.txt', function(err, data) {
-    
-    var _data = String.fromCharCode.apply(null, data);
-    var _lines = _data.split(os.EOL);
-    
-    var _historyObject = {};
-    if (_lines) {
-      for (var i = 0; i < _lines.length; i++) {
-        try {
-          var _msg = JSON.parse(_lines[i]);
-          _historyObject[i] = _msg;  
-        } catch (err) {
-          // do nothing
-        }
-                
-      }
-    }
-    
-    socket.emit('history-onload', _historyObject);
+  // uncomment below if you want to show previous messages from history.txt when first loading
+  // fs.readFile('history.txt', function(err, data) {
+  //   
+  //   var _data = String.fromCharCode.apply(null, data);
+  //   var _lines = _data.split(os.EOL);
+  //   
+  //   var _historyObject = {};
+  //   if (_lines) {
+  //     for (var i = 0; i < _lines.length; i++) {
+  //       try {
+  //         var _msg = JSON.parse(_lines[i]);
+  //         _historyObject[i] = _msg;  
+  //       } catch (err) {
+  //         // do nothing
+  //       }
+  //               
+  //     }
+  //   }
+  //   
+  //   socket.emit('history-onload', _historyObject);
   });
 });
 
