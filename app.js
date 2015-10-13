@@ -15,10 +15,12 @@ io.on('connection', function(socket){
   
   _usersOnline++;
   io.emit('updateUsersOnline', _usersOnline);
+  io.emit('connected');
   
   socket.on('disconnect', function() {
     _usersOnline--;
     io.emit('updateUsersOnline', _usersOnline);
+    io.emit('disconnected');
   });
   
   

@@ -55,6 +55,14 @@
         return false;
       });
       
+      socket.on('connected', function() {
+        $('#messages').append($('<li>').text("user has connected"));
+      });
+      
+      socket.on('disconnected', function() {
+        $('#messages').append($('<li>').text("user has disconnected"));
+      });
+      
       socket.on('chat message', function(msg){
         var _date = new Date(msg.datestamp);
         var _friendlyDate = _date.toLocaleDateString() + " - " + _date.toLocaleTimeString();
