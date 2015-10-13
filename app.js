@@ -5,11 +5,24 @@ var fs = require('fs');
 var os = require('os');
 var process = require('process');
 
+var _usersOnline = 0;
+
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
 io.on('connection', function(socket){
+  
+  _usersOnline++;
+  io.emit('updateUsersOnline', _usersOnline);
+  
+  socket.on('disconnect', function() {
+    _usersOnline--;
+    io.emit('updateUsersOnline', _usersOnline);
+  });
+  
+  
+  
   socket.on('chat message', function(msg){
     msg.ipAddress = this.handshake.address;
     msg.datestamp = new Date();

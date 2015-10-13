@@ -4,6 +4,7 @@
     <title>Socket.IO chat</title>
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
+      div#header { padding: 10px; background:#333333; color:#ffffff; }
       body { font: 13px Helvetica, Arial; }
       form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
       form input { border: 0; padding: 10px; margin-right: .5%; }
@@ -17,6 +18,9 @@
     
   </head>
   <body>
+    <div id="header">
+      Users online: <span id="usersOnline"></span>
+    </div>
     <ul id="messages"></ul>
     <form action="">
       <input id="username"/>
@@ -55,6 +59,10 @@
         var _date = new Date(msg.datestamp);
         var _friendlyDate = _date.toLocaleDateString() + " - " + _date.toLocaleTimeString();
         $('#messages').append($('<li>').text(_friendlyDate + " - " + msg.username + " - " + msg.message));
+      });
+      
+      socket.on('updateUsersOnline', function(usersOnline) {
+        $('#usersOnline').html(usersOnline);
       });
       
     </script>
