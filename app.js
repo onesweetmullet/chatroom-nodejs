@@ -29,8 +29,9 @@ io.on('connection', function(socket){
     msg.ipAddress = this.handshake.address;
     msg.datestamp = new Date();
     
-    fs.appendFile('history.txt', JSON.stringify(msg) + os.EOL, function(err) {
-        
+    fs.appendFile('./history.txt', JSON.stringify(msg) + os.EOL, function(err) {
+        if (err)
+          console.log(err);
     });
     
     console.log('message: ' + msg.username + " - " + msg.message);
